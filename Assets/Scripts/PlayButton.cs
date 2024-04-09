@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class PlayButton : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PlayButton : MonoBehaviour
         Sunday = DateTime.Now.DayOfWeek == DayOfWeek.Sunday;
         Debug.Log("Is today Sunday? " + Sunday);
         isPlaying = false;
+
+
     }
 
     public void onPlay()
@@ -34,4 +37,12 @@ public class PlayButton : MonoBehaviour
             Checker.SetActive(true);
         }
     }
+
+    public void ToggleChanged(bool isOn)
+    {
+        SinnerSundayBypass = isOn;
+        Debug.Log("Toggle state is now: " + isOn);
+    }
+
+
 }
