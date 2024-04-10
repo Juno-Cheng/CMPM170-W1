@@ -11,7 +11,7 @@ public class PlayButton : MonoBehaviour
     [SerializeField] public GameObject Checker;
     [SerializeField] private bool Sunday;
     [SerializeField] private bool SinnerSundayBypass;
-    [SerializeField] private bool isPlaying;
+    [SerializeField] public bool isPlaying;
     // Start is called before the first frame update
     void Start()
     {
