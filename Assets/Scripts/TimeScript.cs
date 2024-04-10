@@ -41,7 +41,6 @@ public class TimeScript : MonoBehaviour
     float timePassed = 0;
     void Update()
     {
-        Debug.Log(clickedOver);
         if(clickedOver&&Input.GetMouseButton(0)){
             speedUp = true;
         }
