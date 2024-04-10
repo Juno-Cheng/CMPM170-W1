@@ -12,6 +12,7 @@ public class TimeScript : MonoBehaviour
     //[SerializeField] TextMeshProUGUI todayDate;
     [SerializeField] TextMeshProUGUI nextSundayDate;
     [SerializeField] TextMeshProUGUI timeLeft;
+    int totalSeconds;
     void Start()
     {
         DateTime currentDate = DateTime.Now;
@@ -28,23 +29,61 @@ public class TimeScript : MonoBehaviour
         //https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings
         //Debug.Log(difference.ToString(@"dd\:hh\:mm\:ss"));
 
-        StartCoroutine(subtractSecond(difference));
+        totalSeconds = (int) difference.TotalSeconds;
+
+        StartCoroutine(StartCountdown());
     }
 
     // Update is called once per frame
+    public bool mouseOver = false;
+    bool speedUp = false;
+    float timePassed = 0;
     void Update()
     {
-        
+        if(mouseOver&&Input.GetMouseButton(0)){
+            speedUp = true;
+        }
+        else{
+            speedUp = false;
+        }
+        //Debug.Log((mouseOver,speedUp,timePassed));
+        SpeedUpTime();
+        if(totalSeconds>0){
+            timeLeft.text = SecondToString(totalSeconds);
+        }
+        if(totalSeconds<0){
+            timeLeft.text = SecondToString(0);
+        }
     }
 
-    IEnumerator subtractSecond(TimeSpan ts){
-        TimeSpan currentTimeSpan = ts;
-        TimeSpan second = new TimeSpan(0,0,1);
-        while(TimeSpan.Compare(currentTimeSpan,TimeSpan.Zero)>0){
-            currentTimeSpan = currentTimeSpan.Subtract(second);
-            timeLeft.text = currentTimeSpan.ToString(@"dd\:hh\:mm\:ss");
+    public void SetMouseOver(bool state){
+        mouseOver = state;
+    }
+
+    string SecondToString(int sec){
+        int days = sec/86400;
+        int hours = (sec%86400)/3600;
+        int mins = (sec%3600)/60;
+        int secs = sec%60;
+        return string.Format("{0:D2}:{1:D2}:{2:D2}:{3:D2}",days,hours,mins,secs);
+    }
+
+    IEnumerator StartCountdown(){
+        while(totalSeconds>0){
+            totalSeconds -=1;
             yield return new WaitForSeconds(1f);
         }
         yield return null;
+    }
+
+    void SpeedUpTime(){
+        if(speedUp == true){
+            timePassed += Time.deltaTime;
+        }
+        else{
+            timePassed = 0f;
+        }
+        totalSeconds -= (int) Mathf.Pow((timePassed),4);
+        
     }
 }
