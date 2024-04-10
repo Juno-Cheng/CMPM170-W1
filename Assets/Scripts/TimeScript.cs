@@ -36,15 +36,18 @@ public class TimeScript : MonoBehaviour
 
     // Update is called once per frame
     public bool mouseOver = false;
+    bool clickedOver = false;
     bool speedUp = false;
     float timePassed = 0;
     void Update()
     {
-        if(mouseOver&&Input.GetMouseButton(0)){
+        Debug.Log(clickedOver);
+        if(clickedOver&&Input.GetMouseButton(0)){
             speedUp = true;
         }
-        else{
+        if(Input.GetMouseButtonUp(0)){
             speedUp = false;
+            clickedOver = false;
         }
         //Debug.Log((mouseOver,speedUp,timePassed));
         SpeedUpTime();
@@ -58,6 +61,11 @@ public class TimeScript : MonoBehaviour
 
     public void SetMouseOver(bool state){
         mouseOver = state;
+    }
+    public void CheckClickedOver(){
+        if(mouseOver){
+            clickedOver = true;
+        }
     }
 
     string SecondToString(int sec){
