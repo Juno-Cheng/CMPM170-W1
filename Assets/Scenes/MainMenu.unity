@@ -1590,6 +1590,7 @@ MonoBehaviour:
   churchTimeSpan: {x: 9, y: 30, z: 0}
   nextSundayDate: {fileID: 1016870241}
   timeLeft: {fileID: 323047165}
+  mouseOver: 0
 --- !u!1 &889061212
 GameObject:
   m_ObjectHideFlags: 0
@@ -2224,7 +2225,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1072, y: -268}
+  m_AnchoredPosition: {x: 1131, y: -286}
   m_SizeDelta: {x: 4.5254, y: 2.4591}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1166441496

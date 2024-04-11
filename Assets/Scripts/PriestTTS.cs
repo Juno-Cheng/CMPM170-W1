@@ -16,7 +16,7 @@ public class PriestTTS : MonoBehaviour
     void Start()
     {
         // Set both isWalking and Reading parameters to false initially
-        animator.SetBool("isWalking", false);
+        animator.SetBool("IsWalking", false);
         animator.SetBool("Reading", false);
     }
 
@@ -35,7 +35,7 @@ public class PriestTTS : MonoBehaviour
     IEnumerator WalkAndRead()
     {
         // Start walking animation
-        animator.SetBool("isWalking", true);
+        animator.SetBool("IsWalking", true);
         animator.SetBool("Reading", false);
 
         // Move to the left for an amount of seconds
@@ -47,7 +47,7 @@ public class PriestTTS : MonoBehaviour
         }
 
         // Stop walking and start reading
-        animator.SetBool("isWalking", false);
+        animator.SetBool("IsWalking", false);
         animator.SetBool("Reading", true);
     }
 }
