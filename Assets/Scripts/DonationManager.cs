@@ -17,6 +17,8 @@ public class DonationManager : MonoBehaviour
 
     HorizontalLayoutGroup hlg;
 
+    Vector3 bowlPos;
+
     float currentDonation = 0f;
 
     Dictionary<string, float> Money = new Dictionary<string, float>{
@@ -42,6 +44,7 @@ public class DonationManager : MonoBehaviour
             _instance =  this;
         }
         hlg = moneyPanel.GetComponent<HorizontalLayoutGroup>();
+        bowlPos = donationBowl.position;
     }
     List<string> denominations;
     List<string> coins = new List<string>();
@@ -70,7 +73,7 @@ public class DonationManager : MonoBehaviour
         yield return new WaitForSeconds((float)delay);
         RandomDenominations();
         while(true){
-            delay = rand.Next(10, 15);
+            delay = rand.Next(15, 20);
             yield return new WaitForSeconds((float)delay);
             RandomDenominations();
         }
@@ -122,13 +125,15 @@ public class DonationManager : MonoBehaviour
 
     IEnumerator MoveBowl(float distance, float speed){
         yield return new WaitForSeconds(1f);
-        Coroutine check = StartCoroutine(MoveRect(donationBowl,distance,speed,Vector3.left));
-        while(check!=null){
-            yield return null;
-        }
+        yield return StartCoroutine(MoveRect(donationBowl,distance,speed,Vector3.left));
         Debug.Log("current donation done");
+        donationBowl.position = bowlPos;
         gamePlaying = false;
-        StartCoroutine(MoveRect(moneyPanel.GetComponent<RectTransform>(),200,400,Vector3.down));
+        yield return StartCoroutine(MoveRect(moneyPanel.GetComponent<RectTransform>(),200,400,Vector3.down));
+        for(int i = 0; i < moneyPanel.transform.childCount; i++){
+            GameObject child = moneyPanel.transform.GetChild(i).gameObject;
+            Destroy(child);
+        }
     }
 
     IEnumerator MoveRect(RectTransform rect, float distance, float speed, Vector3 direction){
