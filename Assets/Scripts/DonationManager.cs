@@ -66,11 +66,11 @@ public class DonationManager : MonoBehaviour
 
     IEnumerator RandomStart(){
         System.Random rand = new System.Random();
-        int delay = rand.Next(5, 10);
+        int delay = rand.Next(3, 5);
         yield return new WaitForSeconds((float)delay);
         RandomDenominations();
         while(true){
-            delay = rand.Next(15, 20);
+            delay = rand.Next(10, 15);
             yield return new WaitForSeconds((float)delay);
             RandomDenominations();
         }
@@ -80,7 +80,7 @@ public class DonationManager : MonoBehaviour
         if(gamePlaying){return;}
         gamePlaying = true;
         StartCoroutine(MoveBowl(2600,400));
-        StartCoroutine(MovePanel(200,400));
+        StartCoroutine(MoveRect(moneyPanel.GetComponent<RectTransform>(),200,400,Vector3.up));
         List<string> randDenoms;
         if(useCoins){
             randDenoms = denominations;
@@ -122,28 +122,25 @@ public class DonationManager : MonoBehaviour
 
     IEnumerator MoveBowl(float distance, float speed){
         yield return new WaitForSeconds(1f);
-        Vector3 pos = donationBowl.position;
-        float moved = 0f;
-        float percentage = 0f;
-        while(percentage<1f){
-            moved += speed * Time.deltaTime;
-            percentage = moved/distance;
-            donationBowl.position = Vector3.Lerp(pos, pos+Vector3.left*distance, percentage);
+        Coroutine check = StartCoroutine(MoveRect(donationBowl,distance,speed,Vector3.left));
+        while(check!=null){
             yield return null;
         }
+        Debug.Log("current donation done");
         gamePlaying = false;
+        StartCoroutine(MoveRect(moneyPanel.GetComponent<RectTransform>(),200,400,Vector3.down));
     }
-    IEnumerator MovePanel(float distance, float speed){
-        Vector3 pos = moneyPanel.transform.position;
+
+    IEnumerator MoveRect(RectTransform rect, float distance, float speed, Vector3 direction){
+        Vector3 pos = rect.position;
         float moved = 0f;
         float percentage = 0f;
         while(percentage<1f){
             moved += speed * Time.deltaTime;
             percentage = moved/distance;
-            moneyPanel.transform.position = Vector3.Lerp(pos, pos+Vector3.up*distance, percentage);
+            rect.position = Vector3.Lerp(pos, pos+direction*distance, percentage);
             yield return null;
         }
-        gamePlaying = false;
     }
 
     public RectTransform getDonationBowl(){
