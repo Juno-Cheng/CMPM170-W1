@@ -11,6 +11,8 @@ public class HealthSlider : MonoBehaviour
     public float maxHealth = 100f;
     private float currentHealth;
 
+    public AudioSource audiosource;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -25,9 +27,9 @@ public class HealthSlider : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f); // Wait for 1 second
+            yield return new WaitForSeconds(1f);
 
-            // Check if isPlaying is true (replace this condition with your actual condition)
+            // Checks other script for isPlaying bool
             if (otherScript.isPlaying)
             {
 
@@ -48,8 +50,11 @@ public class HealthSlider : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // Add audio things here so when player press Space,
-            // they heal and also say stuff like amen or something.
+            // Says Amen when space pressed, won't play if already playing
+            if (!audiosource.isPlaying)
+            {
+                audiosource.Play();
+            }
 
             // Increase health by 20
             ModifyHealth(20f);
