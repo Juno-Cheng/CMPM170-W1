@@ -8,6 +8,7 @@ public class PriestTTS : MonoBehaviour
     public Animator animator; // Reference to the Animator component
     public PlayButton otherScript; // Reference to the other script where isPlaying is defined
     private bool coroutineStarted = false;
+    public bool PriestReady = false;
 
     [Header("Values")]
     float moveDuration = 10f;
@@ -25,7 +26,7 @@ public class PriestTTS : MonoBehaviour
         // Check if the isPlaying variable from the other script is true
         if (otherScript.isPlaying && !coroutineStarted)
         {
-            Debug.Log("Walking");
+            Debug.Log("Reading");
             StartCoroutine(WalkAndRead());
             coroutineStarted = true; // Ensure coroutine doesn't start again
         }
@@ -47,7 +48,10 @@ public class PriestTTS : MonoBehaviour
         }
 
         // Stop walking and start reading
-        animator.SetBool("IsWalking", false);
         animator.SetBool("Reading", true);
+        animator.SetBool("IsWalking", false);
+
+
+        PriestReady = true;
     }
 }

@@ -6,11 +6,24 @@ public class AudioManager : MonoBehaviour
 {
     public AudioClip[] audioClips; 
     private AudioSource audioSource;
+    public PriestTTS script;
+    bool coroutineStarted;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        StartCoroutine(PlayAudioSequentially());
+       
+    }
+
+    void Update()
+    {
+        // Check if the isPlaying variable from the other script is true
+        if (script.PriestReady && !coroutineStarted)
+        {
+            StartCoroutine(PlayAudioSequentially());
+            coroutineStarted = true; // Ensure coroutine doesn't start again
+        }
+
     }
 
     IEnumerator PlayAudioSequentially()
