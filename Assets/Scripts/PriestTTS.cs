@@ -51,6 +51,9 @@ public class PriestTTS : MonoBehaviour
         animator.SetBool("Reading", true);
         animator.SetBool("IsWalking", false);
 
+        //Donations are now possible
+        DonationManager.Instance.StartGame();
+
 
         PriestReady = true;
     }

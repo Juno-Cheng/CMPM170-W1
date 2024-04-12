@@ -55,9 +55,10 @@ public class Money : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             DonationManager.Instance.addCurrentDonation(value);
             Destroy(gameObject);
         }
-        else if (!CheckOverlap(panel)){
-            StartCoroutine(MoveBack());
-        }
+        // else if (!CheckOverlap(panel)){
+        //     StartCoroutine(MoveBack());
+        // }
+        StartCoroutine(MoveBack());
     }
 
     IEnumerator MoveBack(){

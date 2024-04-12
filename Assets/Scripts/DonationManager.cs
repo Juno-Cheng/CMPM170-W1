@@ -9,10 +9,11 @@ using UnityEngine.UI;
 public class DonationManager : MonoBehaviour
 {
     [SerializeField] GameObject dollarPrefab;
-    [SerializeField] GameObject dollarHolder;
+    [SerializeField] GameObject moneyPanel;
     [SerializeField] bool useCoins = false;
     [SerializeField] RectTransform donationBowl;
-    [SerializeField] RectTransform moneyPanel;
+
+    public bool gamePlaying = false;
 
     HorizontalLayoutGroup hlg;
 
@@ -40,7 +41,7 @@ public class DonationManager : MonoBehaviour
         else{
             _instance =  this;
         }
-        hlg = dollarHolder.GetComponent<HorizontalLayoutGroup>();
+        hlg = moneyPanel.GetComponent<HorizontalLayoutGroup>();
     }
     List<string> denominations;
     List<string> coins = new List<string>();
@@ -56,19 +57,30 @@ public class DonationManager : MonoBehaviour
                 paper.Add(denominations[i]);
             }
         }
-
-        RandomDenominations();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void StartGame(){
+        Debug.Log("Starting Donation Game");
+        StartCoroutine(RandomStart());
+    }
+
+    IEnumerator RandomStart(){
+        System.Random rand = new System.Random();
+        int delay = rand.Next(5, 10);
+        yield return new WaitForSeconds((float)delay);
+        RandomDenominations();
+        while(true){
+            delay = rand.Next(15, 20);
+            yield return new WaitForSeconds((float)delay);
+            RandomDenominations();
+        }
     }
     
     void RandomDenominations(){
-        hlg.enabled = true;
-        StartCoroutine(MoveBowl(2200,400));
+        if(gamePlaying){return;}
+        gamePlaying = true;
+        StartCoroutine(MoveBowl(2600,400));
+        StartCoroutine(MovePanel(200,400));
         List<string> randDenoms;
         if(useCoins){
             randDenoms = denominations;
@@ -101,14 +113,15 @@ public class DonationManager : MonoBehaviour
     }
 
     void SpawnDollar(float value){
-        Vector3 targetPos = moneyPanel.position;
+        Vector3 targetPos = moneyPanel.transform.position;
         GameObject dollarObj = Instantiate(dollarPrefab, targetPos, Quaternion.identity);
-        dollarObj.transform.SetParent(dollarHolder.transform);
+        dollarObj.transform.SetParent(moneyPanel.transform);
         dollarObj.GetComponent<Money>().value = value;
 
     }
 
     IEnumerator MoveBowl(float distance, float speed){
+        yield return new WaitForSeconds(1f);
         Vector3 pos = donationBowl.position;
         float moved = 0f;
         float percentage = 0f;
@@ -118,13 +131,26 @@ public class DonationManager : MonoBehaviour
             donationBowl.position = Vector3.Lerp(pos, pos+Vector3.left*distance, percentage);
             yield return null;
         }
+        gamePlaying = false;
+    }
+    IEnumerator MovePanel(float distance, float speed){
+        Vector3 pos = moneyPanel.transform.position;
+        float moved = 0f;
+        float percentage = 0f;
+        while(percentage<1f){
+            moved += speed * Time.deltaTime;
+            percentage = moved/distance;
+            moneyPanel.transform.position = Vector3.Lerp(pos, pos+Vector3.up*distance, percentage);
+            yield return null;
+        }
+        gamePlaying = false;
     }
 
     public RectTransform getDonationBowl(){
         return donationBowl;
     }
     public RectTransform getMoneyPanel(){
-        return moneyPanel;
+        return moneyPanel.GetComponent<RectTransform>();
     }
 
     public void addCurrentDonation(float value){
