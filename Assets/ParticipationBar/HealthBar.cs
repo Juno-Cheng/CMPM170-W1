@@ -71,7 +71,7 @@ public class HealthSlider : MonoBehaviour
 
         sequenceTimer += Time.deltaTime;
 
-        // Check if the timer has reached the interval
+        //Increases amount of letter spawneds
         if (sequenceTimer >= increaseInterval)
         {
             // Increase sequence length if it's less than the maximum length
@@ -86,12 +86,7 @@ public class HealthSlider : MonoBehaviour
         }
 
 
-        if (Input.anyKeyDown)
-        {
-            Debug.Log("Key Pressed: " + Input.inputString);
-        }
-
-        //Increase Multi
+        //Increases HP Depletion + Checks for Space
         if (otherScript.isPlaying)
         {
            
@@ -137,6 +132,7 @@ public class HealthSlider : MonoBehaviour
             {
                 UpdateRemoveArrowText();  // Update the text to show remaining keys
             }
+
             else
             {
                 // If all keys were pressed correctly
