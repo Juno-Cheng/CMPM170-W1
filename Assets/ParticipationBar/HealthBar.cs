@@ -69,7 +69,7 @@ public class HealthSlider : MonoBehaviour
     private void Update()
     {
 
-        sequenceTimer += Time.deltaTime;
+        
 
         //Increases amount of letter spawneds
         if (sequenceTimer >= increaseInterval)
@@ -89,7 +89,7 @@ public class HealthSlider : MonoBehaviour
         //Increases HP Depletion + Checks for Space
         if (otherScript.isPlaying)
         {
-           
+            sequenceTimer += Time.deltaTime;
             // Increase multi by a small amount each frame
             multi += 0.001f * Time.deltaTime; // Modify 0.01f to adjust the rate of increment
 
