@@ -16,16 +16,17 @@ public class Money : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     public void SetMouseOver(bool state){
         isMouseOver = state;
         if(isMouseOver){
-            transform.localScale = Vector3.one*1.75f;
+            transform.localScale = Vector3.one*6f;
         }
         else{
-            transform.localScale = Vector3.one*1.5f;
+            transform.localScale = Vector3.one*4f;
         }
     }
 
     void Start(){
         goal = DonationManager.Instance.getDonationBowl();
         panel = DonationManager.Instance.getMoneyPanel();
+        transform.Rotate(Vector3.forward, 90f);
     }
 
     void Update(){
