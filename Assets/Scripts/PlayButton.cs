@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayButton : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class PlayButton : MonoBehaviour
     [SerializeField] private bool Sunday;
     [SerializeField] private bool SinnerSundayBypass;
     [SerializeField] public bool isPlaying;
+    
+    [SerializeField] TextMeshProUGUI timerText;
+    float currentTime;
+    bool timeIsRunning;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +27,21 @@ public class PlayButton : MonoBehaviour
 
     }
 
+    void Update(){
+        if (timeIsRunning){
+            currentTime += Time.deltaTime;
+            DisplayTime(currentTime);
+        }
+    }
+
     public void onPlay()
     {
         //If being Played on Sunday
         if (Sunday || SinnerSundayBypass)
         {
             isPlaying = true;
+            timeIsRunning = true;
+            timerText.enabled = true;
             MainMenu.SetActive(false);
         }
         else
@@ -44,5 +58,11 @@ public class PlayButton : MonoBehaviour
         Debug.Log("Toggle state is now: " + isOn);
     }
 
+    void DisplayTime(float timeToDisplay){
+        timerText.text = string.Format("{0:F2}",currentTime);
+    }
 
+    public float GetTime(){
+        return currentTime;
+    }
 }
