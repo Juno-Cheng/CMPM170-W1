@@ -65,4 +65,7 @@ public class PlayButton : MonoBehaviour
     public float GetTime(){
         return currentTime;
     }
+    public void ResetScores(){
+        PlayerPrefs.DeleteAll();
+    }
 }

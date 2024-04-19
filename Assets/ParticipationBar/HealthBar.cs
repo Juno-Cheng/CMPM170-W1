@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HealthSlider : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class HealthSlider : MonoBehaviour
     private int currentArrowIndex;
     public bool ArrowActive = false;
     public Text arrowText;
+
+    [Header("Timer")]
+    public PlayButton pb;
 
     private int sequenceLength = 3; // Initial sequence length
     private int maxLength = 10; // Maximum length of sequence, adjust as needed
@@ -64,6 +68,16 @@ public class HealthSlider : MonoBehaviour
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
         slider.value = currentHealth;
+
+        if(currentHealth<=0){
+            float highScore = PlayerPrefs.GetFloat("highScore",0);
+            float lastScore = pb.GetTime();
+            if(lastScore>highScore){
+                PlayerPrefs.SetFloat("highScore",lastScore);
+            }
+            PlayerPrefs.SetFloat("lastScore",lastScore);
+            SceneManager.LoadScene("EndScene");
+        }
     }
 
     private void Update()
