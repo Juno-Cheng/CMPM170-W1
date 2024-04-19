@@ -13,7 +13,10 @@ public class DonationManager : MonoBehaviour
     [SerializeField] bool useCoins = false;
     [SerializeField] RectTransform donationBowl;
 
+    [SerializeField] HealthSlider hp;
+
     public bool gamePlaying = false;
+    public int rounds = 0;
 
     HorizontalLayoutGroup hlg;
 
@@ -68,15 +71,33 @@ public class DonationManager : MonoBehaviour
     }
 
     IEnumerator RandomStart(){
-        System.Random rand = new System.Random();
-        int delay = rand.Next(3, 5);
+        int delay = Random.Range(3, 5);
         yield return new WaitForSeconds((float)delay);
-        RandomDenominations();
+        yield return StartCoroutine(RandomStartGame(3));
         while(true){
-            delay = rand.Next(15, 20);
+            delay = Random.Range(Mathf.Min(3+rounds,5), Mathf.Max(5,10-rounds));
             yield return new WaitForSeconds((float)delay);
-            RandomDenominations();
+            int amount = Random.Range(Mathf.Min(3+rounds,5),Mathf.Min(5+rounds,10));
+            yield return StartCoroutine(RandomStartGame(amount));   
         }
+    }
+
+    IEnumerator RandomStartGame(int numDollars){
+        if(gamePlaying){yield break;}
+        Debug.Log("Starting Donation Round");
+        gamePlaying = true;
+        StartCoroutine(MoveBowl(2600,Mathf.Min(300+200*rounds,2000)));
+        StartCoroutine(MoveRect(moneyPanel.GetComponent<RectTransform>(),200,400,Vector3.up));
+        int added = 0;
+        while(added<numDollars){
+            added+=1;
+            int index = Random.Range(0,paper.Count);
+            SpawnDollar(Money[paper[index]]);
+        }
+        while(gamePlaying){
+            yield return null;
+        }
+        rounds+=1;
     }
     
     void RandomDenominations(){
@@ -119,7 +140,7 @@ public class DonationManager : MonoBehaviour
         Vector3 targetPos = moneyPanel.transform.position;
         GameObject dollarObj = Instantiate(dollarPrefab, targetPos, Quaternion.identity);
         dollarObj.transform.SetParent(moneyPanel.transform);
-        dollarObj.GetComponent<Money>().value = value;
+        dollarObj.GetComponent<Money>().SetDollarValue(value);
 
     }
 
@@ -132,6 +153,7 @@ public class DonationManager : MonoBehaviour
         yield return StartCoroutine(MoveRect(moneyPanel.GetComponent<RectTransform>(),200,400,Vector3.down));
         for(int i = 0; i < moneyPanel.transform.childCount; i++){
             GameObject child = moneyPanel.transform.GetChild(i).gameObject;
+            hp.ModifyHealth(-10);
             Destroy(child);
         }
     }
@@ -157,6 +179,6 @@ public class DonationManager : MonoBehaviour
 
     public void addCurrentDonation(float value){
         currentDonation += value;
-        Debug.Log(currentDonation);
+        //Debug.Log(currentDonation);
     }
 }

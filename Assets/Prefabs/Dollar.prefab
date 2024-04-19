@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 88b5bd74431e47448bfeaa85ca7b6084, type: 3}
+  m_Sprite: {fileID: 1681594301, guid: 4aa287d3722fd7249b196a1268d98143, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -90,6 +90,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
+  moneySpriteList:
+  - {fileID: 1681594301, guid: 4aa287d3722fd7249b196a1268d98143, type: 3}
+  - {fileID: -258651301, guid: 4aa287d3722fd7249b196a1268d98143, type: 3}
+  - {fileID: -1561635102, guid: 4aa287d3722fd7249b196a1268d98143, type: 3}
+  - {fileID: -466394953, guid: 4aa287d3722fd7249b196a1268d98143, type: 3}
+  - {fileID: 582370468, guid: 4aa287d3722fd7249b196a1268d98143, type: 3}
+  - {fileID: 1169605524, guid: 4aa287d3722fd7249b196a1268d98143, type: 3}
+  - {fileID: -1083168467, guid: 4aa287d3722fd7249b196a1268d98143, type: 3}
 --- !u!114 &3178745308591756636
 MonoBehaviour:
   m_ObjectHideFlags: 0

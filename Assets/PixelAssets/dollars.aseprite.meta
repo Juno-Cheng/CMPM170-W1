@@ -148,8 +148,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 42
+      x: 82
+      y: 4
       width: 70
       height: 30
     spriteID: 441740368eb5df042bbe7f706a7b0cdb
@@ -160,7 +160,107 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    uvTransform: {x: 82, y: 4}
+  - name: dollars_Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 160
+      y: 4
+      width: 70
+      height: 30
+    spriteID: 9915e9251e71a8647b82a21b07138d4f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 160, y: 4}
+  - name: dollars_Frame_3
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 42
+      width: 70
+      height: 30
+    spriteID: 1f1bbc52d9864054c9d400d8148d29aa
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
     uvTransform: {x: 4, y: 42}
+  - name: dollars_Frame_4
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 82
+      y: 42
+      width: 70
+      height: 30
+    spriteID: dfd504afefcf4ed44b72ead711f19275
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 82, y: 42}
+  - name: dollars_Frame_5
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 160
+      y: 42
+      width: 70
+      height: 30
+    spriteID: f20a331cd69e01c459be743ca2a593ec
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 160, y: 42}
+  - name: dollars_Frame_6
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 80
+      width: 70
+      height: 30
+    spriteID: a14041320172cd344bc781b855eb2d95
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 80}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -188,6 +288,51 @@ ScriptedImporter:
         width: 70
         height: 30
       spriteId: 441740368eb5df042bbe7f706a7b0cdb
+    - name: dollars_Frame_2
+      frameIndex: 2
+      additiveSortOrder: 0
+      cellRect:
+        x: 0
+        y: 0
+        width: 70
+        height: 30
+      spriteId: 9915e9251e71a8647b82a21b07138d4f
+    - name: dollars_Frame_3
+      frameIndex: 3
+      additiveSortOrder: 0
+      cellRect:
+        x: 0
+        y: 0
+        width: 70
+        height: 30
+      spriteId: 1f1bbc52d9864054c9d400d8148d29aa
+    - name: dollars_Frame_4
+      frameIndex: 4
+      additiveSortOrder: 0
+      cellRect:
+        x: 0
+        y: 0
+        width: 70
+        height: 30
+      spriteId: dfd504afefcf4ed44b72ead711f19275
+    - name: dollars_Frame_5
+      frameIndex: 5
+      additiveSortOrder: 0
+      cellRect:
+        x: 0
+        y: 0
+        width: 70
+        height: 30
+      spriteId: f20a331cd69e01c459be743ca2a593ec
+    - name: dollars_Frame_6
+      frameIndex: 6
+      additiveSortOrder: 0
+      cellRect:
+        x: 0
+        y: 0
+        width: 70
+        height: 30
+      spriteId: a14041320172cd344bc781b855eb2d95
     linkedCells: []
     parentIndex: -1
   platformSettings: []

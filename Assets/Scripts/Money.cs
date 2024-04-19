@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class Money : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public float value = 0f;
+    public Sprite[] moneySpriteList;
+    Image currentDollar;
     RectTransform goal;
     RectTransform panel;
     bool isMouseOver;
@@ -22,11 +24,24 @@ public class Money : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             transform.localScale = Vector3.one*4f;
         }
     }
+    void Awake(){
+        currentDollar = GetComponent<Image>();
+    }
 
     void Start(){
         goal = DonationManager.Instance.getDonationBowl();
         panel = DonationManager.Instance.getMoneyPanel();
         transform.Rotate(Vector3.forward, 90f);
+    }
+    public void SetDollarValue(float x){
+        value = x;
+        if(x==1){currentDollar.sprite=moneySpriteList[0];}
+        else if(x==2){currentDollar.sprite=moneySpriteList[1];}
+        else if(x==5){currentDollar.sprite=moneySpriteList[2];}
+        else if(x==10){currentDollar.sprite=moneySpriteList[3];}
+        else if(x==20){currentDollar.sprite=moneySpriteList[4];}
+        else if(x==50){currentDollar.sprite=moneySpriteList[5];}
+        else if(x==100){currentDollar.sprite=moneySpriteList[6];}
     }
 
     void Update(){

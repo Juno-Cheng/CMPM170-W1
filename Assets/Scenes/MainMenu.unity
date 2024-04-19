@@ -2993,7 +2993,9 @@ MonoBehaviour:
   moneyPanel: {fileID: 742265730}
   useCoins: 0
   donationBowl: {fileID: 522584005}
+  hp: {fileID: 2090752049}
   gamePlaying: 0
+  rounds: 0
 --- !u!1 &1481969329
 GameObject:
   m_ObjectHideFlags: 0
