@@ -15,6 +15,9 @@ public class DonationManager : MonoBehaviour
 
     [SerializeField] HealthSlider hp;
 
+    [SerializeField] Image donationBowlSprite;
+    [SerializeField] Sprite[] dbs;
+
     public bool gamePlaying = false;
     public int rounds = 0;
 
@@ -85,6 +88,7 @@ public class DonationManager : MonoBehaviour
     IEnumerator RandomStartGame(int numDollars){
         if(gamePlaying){yield break;}
         Debug.Log("Starting Donation Round");
+        donationBowlSprite.sprite = dbs[0];
         gamePlaying = true;
         StartCoroutine(MoveBowl(2600,Mathf.Min(300+200*rounds,2000)));
         StartCoroutine(MoveRect(moneyPanel.GetComponent<RectTransform>(),200,400,Vector3.up));
@@ -148,12 +152,12 @@ public class DonationManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         yield return StartCoroutine(MoveRect(donationBowl,distance,speed,Vector3.left));
         Debug.Log("current donation done");
+        hp.ModifyHealth(-10*moneyPanel.transform.childCount);
         donationBowl.position = bowlPos;
         gamePlaying = false;
         yield return StartCoroutine(MoveRect(moneyPanel.GetComponent<RectTransform>(),200,400,Vector3.down));
         for(int i = 0; i < moneyPanel.transform.childCount; i++){
             GameObject child = moneyPanel.transform.GetChild(i).gameObject;
-            hp.ModifyHealth(-10);
             Destroy(child);
         }
     }
@@ -179,6 +183,8 @@ public class DonationManager : MonoBehaviour
 
     public void addCurrentDonation(float value){
         currentDonation += value;
-        //Debug.Log(currentDonation);
+        if(moneyPanel.transform.childCount==1){
+            donationBowlSprite.sprite = dbs[1];
+        }
     }
 }
