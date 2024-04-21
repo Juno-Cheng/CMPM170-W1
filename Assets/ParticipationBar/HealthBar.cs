@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class HealthSlider : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class HealthSlider : MonoBehaviour
     private List<KeyCode> arrowSequence;
     private int currentArrowIndex;
     public bool ArrowActive = false;
-    public Text arrowText;
+    public TMP_Text arrowText;
 
     [Header("Timer")]
     public PlayButton pb;
